@@ -9,7 +9,7 @@ public class CardListener {
 
     @RabbitListener(queues = AMQPConfig.QUEUE)
     public void consumer(String message) {
-
+        System.out.println("Message: " + message);
     }
 
 }
