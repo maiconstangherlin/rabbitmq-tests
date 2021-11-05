@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Card {
+public class CardListener {
 
     @RabbitListener(queues = AMQPConfig.QUEUE)
     public void consumer(String message) {
