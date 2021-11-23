@@ -5,7 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableRabbit
+//@EnableWebSocket
 @SpringBootApplication
+//@EnableWebSocketMessageBroker
 public class RabbitMqTestsApplication {
 
     public static void main(String[] args) {
