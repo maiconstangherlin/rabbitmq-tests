@@ -1,15 +1,16 @@
 package org.example.rabbitmq.listener;
 
-import org.example.rabbitmq.config.AMQPConfig;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-@Component
-public class CardListener {
+import static org.example.rabbitmq.config.AMQPConfigUtil.MARKETING_QUEUE;
 
-    @RabbitListener(queues = AMQPConfig.QUEUE)
+@Component
+public class CardMarketingListener {
+
+    @RabbitListener(queues = MARKETING_QUEUE)
     public void consumer(String message) {
-        System.out.println("Message: " + message);
+        System.out.println("Marketing listener: " + message);
     }
 
 }

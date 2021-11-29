@@ -2,10 +2,9 @@ package org.example.rabbitmq.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.rabbitmq.producer.CardProducer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.rabbitmq.producer.CardProducerHeaderExchange;
+import org.example.rabbitmq.producer.CardProducerTopic;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/card")
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CardController {
 
     private final CardProducer cardProducer;
+    private final CardProducerHeaderExchange cardProducerHeaderExchange;
+    private final CardProducerTopic cardProducerTopic;
 
     @GetMapping
     public String card() {
@@ -22,6 +23,16 @@ public class CardController {
     @PostMapping
     public void sendMessage() {
         cardProducer.sendCards();
+    }
+
+    @PostMapping(path = "/header/{routingKey}")
+    public void sendMessageTopic(@PathVariable String routingKey) {
+        cardProducerTopic.sendCards(routingKey);
+    }
+
+    @PostMapping(path = "/header/{departament}")
+    public void sendMessageHeaderExchange(@PathVariable String departament) {
+        cardProducerHeaderExchange.sendCards(departament);
     }
 
 }

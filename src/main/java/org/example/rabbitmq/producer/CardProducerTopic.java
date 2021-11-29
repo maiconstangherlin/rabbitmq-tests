@@ -9,15 +9,15 @@ import java.time.LocalDate;
 import static org.example.rabbitmq.config.AMQPConfigUtil.EXCHANGE_NAME;
 
 @Component
-public class CardProducer {
+public class CardProducerTopic {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void sendCards() {
+    public void sendCards(String routingKey) {
         try {
             var message = "Card criado " + LocalDate.now().toString();
-            rabbitTemplate.convertAndSend(EXCHANGE_NAME, "", message);
+            rabbitTemplate.convertAndSend(EXCHANGE_NAME, routingKey, message);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
